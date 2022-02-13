@@ -75,3 +75,4 @@ These are the notes from a meeting with the frontend developer that describe wha
 - id: SERIAL PRIMARY KEY
 - order_id: string [Foreign key to orders table]
 - product_id: string [Foreign key to products table]
+- quantity: integer
