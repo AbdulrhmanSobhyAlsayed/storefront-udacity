@@ -22,7 +22,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 
 - Current Order by user: '/current-order' [GET] (args: user id)[token required]
-- Completed Orders by user: '/orders' [GET] (args: user id)[token required]
 
 ## Data Shapes
 

@@ -1,54 +1,92 @@
-# Storefront Backend Project
+# Simple Image processing API
 
-## Getting Started
+## Second assignment in Advanced web development course in Udacity powered by FWD
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+this is a simple API for store using:
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+- Express for the webserver
+- JWT for authentication
+- bcrypt for hashing
+- Jasmine and supertest for testing
 
-## Steps to Completion
+## Installation
 
-### 1. Plan to Meet Requirements
+in order to test this application you have to follow these steps:
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
+### database setup
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+1. install postgres database
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+2. create two databases one for dev and another one for test
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
+```sh
+    CREATE database database_name
+```
 
-### 2.  DB Creation and Migrations
+3. create new user and grant to him all privileges
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
+```sh
+    create user user_name with encrypted password 'mypassword';
+```
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+```sh
+    grant all privileges on database database_name to user_name;
+```
 
-### 3. Models
+### application setup
 
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
+1. clone the project
 
-### 4. Express Handlers
+```sh
+git clone https://github.com/AbdulrhmanSobhyAlsayed/storefront-udacity.git
+```
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+2. move to the folder
 
-### 5. JWTs
+3. create .env file with these variables
 
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
+```sh
+ENV=current_env
+POSTGRES_HOST=the host
+POSTGRES_DB=database_name
+POSTGRES_TEST_DB= database_test_name
+POSTGRES_USER=database_user
+POSTGRES_PASSWORD=duser_password
+BCRYPT_PASSWORD
+SALT_ROUNDS
+TOKEN_SECRET
+```
 
-### 6. QA and `README.md`
+4. update database.json file with database information
 
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
+5. Install the dependencies and devDependencies and start the server.
 
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+```sh
+npm install
+```
+
+6. run the migration
+
+```sh
+npm run migrate:up
+```
+
+7. run the server
+
+```sh
+npm run start
+```
+
+8. to build the project
+
+```sh
+npm run build
+```
+
+and the built project will be in dist folder
+
+9. to run test of the project
+
+```sh
+npm run test
+```

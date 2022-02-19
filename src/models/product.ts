@@ -56,7 +56,7 @@ export class ProductModel {
     }
   }
 
-  async indexByCategory(category: string): Promise<Product> {
+  async indexByCategory(category: string): Promise<Product[]> {
     try {
       const sql = "SELECT * FROM products WHERE category=($1)";
       // @ts-ignore
@@ -65,7 +65,7 @@ export class ProductModel {
       const result = await conn.query(sql, [category]);
       conn.release();
 
-      return result.rows[0];
+      return result.rows;
     } catch (err) {
       throw new Error(
         `Could not find products with category ${category}. Error: ${err}`
