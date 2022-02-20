@@ -33,6 +33,8 @@ in order to test this application you have to follow these steps:
     grant all privileges on database database_name to user_name;
 ```
 
+4. database runs on the default port 5432
+
 ### application setup
 
 1. clone the project
@@ -71,7 +73,7 @@ npm install
 npm run migrate:up
 ```
 
-7. run the server
+7. run the server (the application will runs on port 3000 by default)
 
 ```sh
 npm run start
