@@ -11,7 +11,7 @@ export class OrderModel {
   async currentOrder(userId: string): Promise<any> {
     try {
       // @ts-ignore
-      console.log(userId);
+
       const conn = await db.connect();
       const getIdSql =
         "SELECT id FROM orders where status = 'active' and user_id = ($1)";

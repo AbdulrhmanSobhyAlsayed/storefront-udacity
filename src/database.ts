@@ -18,5 +18,5 @@ const db = new Pool({
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
 });
-console.log(db);
+
 export default db;

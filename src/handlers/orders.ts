@@ -28,7 +28,6 @@ const createOrder = async (req: Request, res: Response) => {
 
     res.status(200).json(createdOrder);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };
@@ -43,7 +42,6 @@ const addProduct = async (req: Request, res: Response) => {
 
     res.status(200).json(addedProduct);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };
