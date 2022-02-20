@@ -1,17 +1,17 @@
 import express, { Request, Response } from "express";
 import { UserModel } from "../models/user";
 import bcrypt from "bcrypt";
-
 import dotenv from "dotenv";
+import { checkAccessToken, getAccessToken } from "../middleware/auth";
 
 dotenv.config();
 
 const { BCRYPT_PASSWORD } = process.env;
 
 const userRoutes = (app: express.Application) => {
-  app.get("/users", listUsers);
-  app.get("/users/:id", showUser);
   app.post("/users", createUser);
+  app.get("/users", checkAccessToken, listUsers);
+  app.get("/users/:id", checkAccessToken, showUser);
 };
 
 const user = new UserModel();
@@ -44,7 +44,11 @@ const createUser = async (req: Request, res: Response) => {
     );
     const createdUser = await user.create(req.body);
 
-    res.status(200).json(createdUser);
+    createdUser.password = "";
+
+    res
+      .status(200)
+      .json({ user: createdUser, accessToken: getAccessToken(createdUser) });
   } catch (err) {
     res.status(500).json(err);
   }

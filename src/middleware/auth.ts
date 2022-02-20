@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import { User } from "../models/user";
 
 dotenv.config();
 
@@ -23,4 +24,8 @@ export const checkAccessToken = (
     res.json("Access denied, invalid token");
     return;
   }
+};
+
+export const getAccessToken = (user: User) => {
+  return jwt.sign(user, process.env.TOKEN_SECRET as string);
 };
