@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import { checkAccessToken } from "../middleware/auth";
 import { OrderModel } from "../models/order";
 
 const orderRoutes = (app: express.Application) => {
-  app.get("/current-order", currentOrder);
-  app.post("/orders", createOrder);
-  app.post("/add-product", addProduct);
+  app.get("/current-order", checkAccessToken, currentOrder);
+  app.post("/orders", checkAccessToken, createOrder);
+  app.post("/add-product", checkAccessToken, addProduct);
 };
 
 const order = new OrderModel();

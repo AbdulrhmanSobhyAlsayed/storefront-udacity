@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import { checkAccessToken } from "../middleware/auth";
 import { ProductModel } from "../models/product";
 
 const productRoutes = (app: express.Application) => {
   app.get("/products", listProducts);
   app.get("/products/:id", showProduct);
-  app.post("/products", createProduct);
+  app.post("/products", checkAccessToken, createProduct);
   app.get("/products-by-category", productsByCategory);
 };
 

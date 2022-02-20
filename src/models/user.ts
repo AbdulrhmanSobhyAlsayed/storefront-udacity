@@ -78,4 +78,16 @@ export class UserModel {
       );
     }
   }
+
+  async authenticate(
+    firstname: string,
+    lastname: string
+  ): Promise<User | null> {
+    const conn = await db.connect();
+    const sql = "SELECT * FROM users WHERE firstname=($1) and lastname=($2)";
+
+    const result = await conn.query(sql, [firstname, lastname]);
+
+    return result.rows.length ? result.rows[0] : null;
+  }
 }
