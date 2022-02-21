@@ -1,10 +1,19 @@
 import supertest from "supertest";
-import { User } from "../models/user";
+import { User, UserModel } from "../models/user";
+import { ProductModel } from "../models/product";
+import { OrderModel } from "../models/order";
+import db from "../database";
 import app from "../server";
 
 const request = supertest(app);
+
 let user: User;
 let accessToken: string;
+
+const userModel = new UserModel();
+const productModel = new ProductModel();
+const orderModel = new OrderModel();
+
 beforeAll(async () => {
   const res = await request.post("/users").send({
     id: 2,
@@ -16,13 +25,14 @@ beforeAll(async () => {
   user = res.body.user;
   accessToken = res.body.accessToken;
 });
+
 describe("test Product API", () => {
-  const body = {
-    name: "testProduct1",
-    price: 20,
-    category: "testCategory1",
-  };
   it("should return 200 product when create new product", async () => {
+    const body = {
+      name: "testProduct1",
+      price: 20,
+      category: "testCategory1",
+    };
     const result = await request
       .post("/products")
       .set("Authorization", "Bearer " + accessToken)
@@ -47,12 +57,12 @@ describe("test Product API", () => {
   });
 });
 describe("test User API", () => {
-  const body = {
-    firstname: "testFirst1",
-    lastname: "testLast1",
-    password: "test1",
-  };
   it("should return created user with status 200", async () => {
+    const body = {
+      firstname: "testFirst1",
+      lastname: "testLast1",
+      password: "test1",
+    };
     const result = await request.post("/users").send(body);
 
     expect(result.status).toEqual(200);
